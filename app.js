@@ -5,8 +5,10 @@ require("./db/db");
 app.use(express.json());
 app.use(cors());
 //
+const GamesRoute = require("./routers/routes/gamesRoute");
 const signUpRoute = require("./routers/routes/signUpRoute");
 const loginRoute = require("./routers/routes/logInRoute");
+app.use(GamesRoute);
 app.use(signUpRoute);
 app.use(loginRoute);
 ////////////////////////////
