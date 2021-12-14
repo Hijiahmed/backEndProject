@@ -5,5 +5,6 @@ const gameModel = new mongoose.Schema({
   img: { type: String },
   video: { type: String },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "userModel" },
+  comment:{type:Array}
 });
 module.exports = mongoose.model("gameModel", gameModel);
