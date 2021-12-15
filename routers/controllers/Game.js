@@ -25,8 +25,7 @@ const deleteGame= async(req,res)=>{
   const user = req.token.userId;
   try {
     const game = await gameModel.findOneAndDelete({ _id: id,user:user })
-    const games = await gameModel.find({})
-      res.status(200).json(games);
+      res.status(200).json(game);
   } catch (error) {
     res.send(error);
   }
@@ -75,5 +74,4 @@ const deleteComment = (req, res) => {
     });
 };
 //
-
 module.exports = { postGame, getGames,deleteGame,getGamee,deleteComment,addComment };

@@ -1,11 +1,11 @@
-const express = require("express");
-const LikeRoute = express.Router();
+// const express = require("express");
+// const LikeRoute = express.Router();
 
-const {postLike,deleteLike}=require("../controllers/like");
-const { authentication } = require("../middlewares/authentication");
+// const {postLike,deleteLike}=require("../controllers/like");
+// const { authentication } = require("../middlewares/authentication");
 
-LikeRoute.post("/Like/:id",authentication,postLike)
-LikeRoute.delete("/Like/:id",authentication,postLike)
+// LikeRoute.post("/Like/:id",authentication,postLike)
+// LikeRoute.delete("/Like/:id",authentication,deleteLike)
 
 
-module.exports = LikeRoute;
+// module.exports = LikeRoute;

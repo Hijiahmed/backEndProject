@@ -8,6 +8,9 @@ app.use(cors());
 const GamesRoute = require("./routers/routes/gamesRoute");
 const signUpRoute = require("./routers/routes/signUpRoute");
 const loginRoute = require("./routers/routes/logInRoute");
+// const LikeRoute=require("./routers/routes/likeRoute")
+//
+// app.use(LikeRoute)
 app.use(GamesRoute);
 app.use(signUpRoute);
 app.use(loginRoute);
