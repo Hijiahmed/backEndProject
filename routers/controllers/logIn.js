@@ -8,8 +8,8 @@ const login = async (req, res) => {
   try {
     const user = await userModel.findOne({ email: email });
     if (user) {
-      const see = await bcrypt.compare(password, user.password);
-      if (see === true) {
+      const cheeck = await bcrypt.compare(password, user.password);
+      if (cheeck === true) {
         const payload = { userId: user._id, userName: user.name };
         const token = jwt.sign(payload, "hiji");
         res.status(200).json({ token });
