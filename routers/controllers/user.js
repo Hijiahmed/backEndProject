@@ -1,11 +1,32 @@
-const bcrypt = require("bcrypt");
 const userModel = require("../../db/models/userModels");
-
+//
 const userProfile = async (req, res) => {
-let {newName,newEmail}=req.body;
-const user = req.token.userId
-
+    const userId = req.token.userId;
+try {
+    const user = await userModel.findOne({ _id: userId });
+    res.status(200).json(user);
+} catch (error) {
+    res.send(error)
+}
 };
+//
+const deleteUser= async(req,res)=>{
+try {
+    const userId = req.token.userId;
+    const user = await userModel.findOneAndDelete({ _id: userId });
+    res.status(200).json(user);
+} catch (error) {
+    res.send(error)
+}
+}
+//
+const updateName=(req,res)=>{
+
+}
+//
+const updateImg=(req,res)=>{
+
+}
 module.exports = {
-    userProfile
+    userProfile,deleteUser,updateName,updateImg
 };
