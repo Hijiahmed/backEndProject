@@ -18,6 +18,7 @@ try {
 } catch (error) {
     res.send(error)
 }
+
 }
 //
 const updateName=(req,res)=>{
