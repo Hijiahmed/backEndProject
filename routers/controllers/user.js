@@ -21,12 +21,34 @@ try {
 
 }
 //
-const updateName=(req,res)=>{
-
+const updateName=async(req,res)=>{
+    const { name  } = req.body;
+    try {
+      const userId = req.token.userId;
+      const response = await userModel.findOneAndUpdate(
+        { _id: userId },
+        { name },
+        { new: true }
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      res.send(error);
+    }
 }
 //
-const updateImg=(req,res)=>{
-
+const updateImg=async(req,res)=>{
+    const { img  } = req.body;
+    try {
+      const userId = req.token.userId;
+      const response = await userModel.findOneAndUpdate(
+        { _id: userId },
+        { img : img},
+        { new: true }
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      res.send(error);
+    }
 }
 module.exports = {
     userProfile,deleteUser,updateName,updateImg
