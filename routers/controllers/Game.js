@@ -20,6 +20,7 @@ const getGames = async (req, res) => {
     res.send(error);
   }
 };
+//
 const deleteGame= async(req,res)=>{
   const id = req.params.id;
   const user = req.token.userId;
@@ -57,6 +58,7 @@ const addComment = (req, res) => {
       res.send(err)
     });
 };
+//
 const deleteComment = (req, res) => {
   const { comment } = req.body;
   const id = req.params.id;
@@ -75,3 +77,4 @@ const deleteComment = (req, res) => {
 };
 //
 module.exports = { postGame, getGames,deleteGame,getGamee,deleteComment,addComment };
+

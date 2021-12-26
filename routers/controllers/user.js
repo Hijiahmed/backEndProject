@@ -50,6 +50,7 @@ const updateImg=async(req,res)=>{
       res.send(error);
     }
 }
+//
 module.exports = {
     userProfile,deleteUser,updateName,updateImg
 };

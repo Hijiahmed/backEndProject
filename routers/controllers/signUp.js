@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../../db/models/userModels");
 const likeModel = require("../../db/models/likeModels");
+//
 const signUp = async (req, res) => {
   let { name, email, password } = req.body;
   try {
@@ -15,6 +16,7 @@ const signUp = async (req, res) => {
     res.send(error);
   }
 };
+//
 module.exports = {
   signUp,
 };
