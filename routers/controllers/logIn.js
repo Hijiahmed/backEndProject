@@ -11,7 +11,7 @@ const login = async (req, res) => {
       const cheeck = await bcrypt.compare(password, user.password);
       if (cheeck === true) {
         const payload = { userId: user._id, userName: user.name };
-        const token = jwt.sign(payload, "hiji");
+        const token = jwt.sign(payload, "a");
         res.status(200).json({ token });
       } else {
         res.status(403).json("wrong PassWord!");

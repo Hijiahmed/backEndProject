@@ -32,6 +32,21 @@ const deleteGame= async(req,res)=>{
   }
 }
 //
+const updateGame=async(req,res)=>{
+  const id = req.params.id;
+  const user = req.token.userId;
+  let { name,img} = req.body;
+  console.log(user,id);
+  try {
+    const game = await gameModel.findOneAndUpdate({_id:id},{ name,img },{new:true})
+    // const game = await gameModel.findOne({_id:id})
+    console.log(game);
+      res.status(200).json(game);
+  } catch (error) {
+    res.send(error);
+  }
+}
+//
 const getGamee = async (req, res)=> {
   const id = req.params.id
   try {
@@ -76,5 +91,5 @@ const deleteComment = (req, res) => {
     });
 };
 //
-module.exports = { postGame, getGames,deleteGame,getGamee,deleteComment,addComment };
+module.exports = { postGame, getGames,deleteGame,getGamee,deleteComment,addComment,updateGame };
 
