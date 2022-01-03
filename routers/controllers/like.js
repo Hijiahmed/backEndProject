@@ -10,7 +10,6 @@ const postLike=async(req,res)=>{
         } catch (error) {
       res.send(error);
     }
-    
 }
 //
 const getLike= async(req,res)=>{

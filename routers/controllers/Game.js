@@ -2,15 +2,25 @@ const gameModel = require("../../db/models/gamesModels");
 const userModels = require("../../db/models/userModels")
 //
 const postGame = async (req, res) => {
-  let { name, description, img,img1,img2,img3, video } = req.body;
-  const user= req.token.userId
-  const newGame =new gameModel({ name, description, img ,img1 , img2 , img3, video , user });
+  let { name, description, img, video } = req.body;
+  const user= req.token.userId;
+  const userAdmin = await userModels.findOne({ _id: user });
   try {
+  if (userAdmin.admin == true) {
+  const newGame =new gameModel({ name, description, img , video , user });
+    if(newGame){
     const saveGame = await newGame.save();
     res.status(201).json(saveGame);
-  } catch (error) {
+  }
+}
+else{
+  console.log("else admin");
+ res.send("can't post");
+}
+}catch (error) {
     res.send(error);
   }
+
 };
 //
 const getGames = async (req, res) => {
@@ -23,14 +33,6 @@ const getGames = async (req, res) => {
 };
 //
 const deleteGame= async(req,res)=>{
-  // const id = req.params.id;
-  // const user = req.token.userId;
-  // try {
-  //   const game = await gameModel.findOneAndDelete({ _id: id,user:user })
-  //     res.status(200).json(game);
-  // } catch (error) {
-  //   res.send(error);
-  // }
   const id = req.params.id;
   const user = req.token.userId;
   try {
@@ -53,19 +55,21 @@ const deleteGame= async(req,res)=>{
   } catch (error) {
     res.send(error, "error");
   }
-
 }
 //
 const updateGame=async(req,res)=>{
   const id = req.params.id;
   const user = req.token.userId;
-  let  { name, description, img,img1,img2,img3, video }= req.body;
-  // console.log(user,id);
+  let  { name, description, img, video }= req.body;
   try {
-    const game = await gameModel.findOneAndUpdate({_id:id}, { name, description, img,img1,img2,img3, video },{new:true})
-    // const game = await gameModel.findOne({_id:id})
-    console.log(game);
+    const userAdmin = await userModels.findOne({ _id: user });
+    if (userAdmin.admin == true) {
+    const game = await gameModel.findOneAndUpdate({_id:id}, { name, description, img, video },{new:true})
+    // console.log(game);
       res.status(200).json(game);
+    }else{
+      res.send("can't put");
+    }
   } catch (error) {
     res.send(error);
   }
