@@ -15,7 +15,7 @@ const postLike=async(req,res)=>{
 const getLike= async(req,res)=>{
   const user = req.token.userId;
   try {
-    const like = await likeModel.findOne({user}).populate("like")
+    const like = await likeModel.findOne({user}).populate("like");
     res.status(200).json(like.like);
   } catch (error) {
     res.send(error);
