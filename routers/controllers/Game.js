@@ -23,6 +23,21 @@ else{
 
 };
 //
+const AddextraImg = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { img } = req.body;
+    const addimg = await gameModel.findOneAndUpdate(
+      { _id: id },
+      { $push: { extraImg: img } },
+      { new: true }
+    );
+    res.status(201).json(addimg.extraImg);
+  } catch (err) {
+    res.send(err);
+  }
+};
+//
 const getGames = async (req, res) => {
   try {
     const game = await gameModel.find({}).populate("user");
@@ -86,12 +101,14 @@ const getGamee = async (req, res)=> {
 }
 //
 const addComment = (req, res) => {
-  const { comment } = req.body;
+  const { comment,rating } = req.body;
   const id = req.params.id;
-  const user = req.token.userId;
-  const userName=req.token.userName
+  // console.log(req.token);
+  const userId = req.token.userId;
+  const userName=req.token.UserName
+  // console.log(userId,userName);
   gameModel
-    .findOneAndUpdate({ _id: id }, { $push: { comment: {comment, userName} } },{
+    .findOneAndUpdate({ _id: id }, { $push: { comment: {comment,userName,userId,rating} } },{
       new: true
     })
     .populate("user")
@@ -103,12 +120,14 @@ const addComment = (req, res) => {
 };
 //
 const deleteComment = (req, res) => {
-  const { comment } = req.body;
+  const { comment,rating } = req.body;
   const id = req.params.id;
-  const user = req.token.userId;
-  const userName=req.token.userName
+  // console.log(req.token);
+  const userId = req.token.userId;
+  const userName=req.token.UserName
+  // console.log(userId,userName);
   gameModel
-    .findOneAndUpdate({ _id: id }, { $pull: { comment: {comment, userName} } },{
+    .findOneAndUpdate({ _id: id }, { $pull: { comment: {comment,userName,userId,rating} } },{
       new: true
     })
     .populate("user")
@@ -119,5 +138,5 @@ const deleteComment = (req, res) => {
     });
 };
 //
-module.exports = { postGame, getGames,deleteGame,getGamee,deleteComment,addComment,updateGame };
+module.exports = { postGame,AddextraImg, getGames,deleteGame,getGamee,deleteComment,addComment,updateGame };
 
