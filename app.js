@@ -18,7 +18,7 @@ app.use(signUpRoute);
 app.use(loginRoute);
 app.use(userRoute)
 ////////////////////////////
-const Port = 5000;
-app.listen(Port, () => {
+console.log(process.env.PORT);
+app.listen(process.env.PORT, () => {
   console.log("server is running");
 });
